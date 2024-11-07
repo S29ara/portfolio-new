@@ -14,27 +14,27 @@ html {
 
 @font-face {
     font-family: 'Buljirya';
-    src: url(/fonts/buljirya.otf);
+    src: url(./fonts/buljirya.otf);
 }
 
 @font-face {
     font-family: 'ppneuemachina';
-    src: url(/fonts/ppneuemachina-regular.otf);
+    src: url(./fonts/ppneuemachina-regular.otf);
 }
 
 @font-face {
     font-family: 'Hanken-grotesk';
-    src: url(/fonts/hanken_grotesk.ttf);
+    src: url(./fonts/hanken_grotesk.ttf);
 }
 
 @font-face {
     font-family: 'Pixeloid-sans';
-    src: url(/fonts/pixeloidsans.ttf);
+    src: url(./fonts/pixeloidsans.ttf);
 }
 
 @font-face {
     font-family: 'sk-concretica';
-    src: url(/fonts/sk-concretica-trial.ttf);
+    src: url(./fonts/sk-concretica-trial.ttf);
 }
 
 /*//////////////////////////////////*/
@@ -90,7 +90,7 @@ body {
     right: 0;
     width: 100%;
     padding: 0 2em;
-    background-image: url(/images/asfalt-light.png);
+    background-image: url(./images/asfalt-light.png);
     background-color: rgba(247, 246, 245, 0.6); /* Semi-transparante achtergrond */
     backdrop-filter: blur(6px); /* Blur effect op de achtergrond */
     z-index: 900; /* Zorg ervoor dat het boven andere elementen staat */
@@ -337,7 +337,7 @@ body {
 .container-project {
     width: 100%;
     background-color: transparent;
-    background: url(/images/noisey-brackground.png) repeat,linear-gradient(to bottom, #f7f6f5 0%, #f7f6f5 30%, #F2C7BD 60%, #F2C7BD 100%);
+    background: url(./images/noisey-brackground.png) repeat,linear-gradient(to bottom, #f7f6f5 0%, #f7f6f5 30%, #F2C7BD 60%, #F2C7BD 100%);
     background-blend-mode: overlay;
     display: flex;
     justify-content: center;
@@ -493,7 +493,7 @@ body {
 .freetime-work-section {
     position: relative;
     background-color: transparent;
-    background: url(/images/noisey-brackground.png) repeat, #F2C7BD;
+    background: url(./images/noisey-brackground.png) repeat, #F2C7BD;
     background-blend-mode: overlay;
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
     padding:  5em 2em;
@@ -1478,9 +1478,6 @@ body {
     grid-column-end: 3;
     grid-row: 3;
     grid-row-end: 5;
-    background-color: var();
-    padding: 0.5em;
-    border-radius: 8px;
     z-index: 1;
     transform: rotate(-5deg);
 }
