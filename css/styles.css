@@ -1,0 +1,1792 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/*////////////*/
+/*FONT FAMILY*/
+/*//////////*/
+
+@font-face {
+    font-family: 'Buljirya';
+    src: url(/fonts/buljirya.otf);
+}
+
+@font-face {
+    font-family: 'ppneuemachina';
+    src: url(/fonts/ppneuemachina-regular.otf);
+}
+
+@font-face {
+    font-family: 'Hanken-grotesk';
+    src: url(/fonts/hanken_grotesk.ttf);
+}
+
+@font-face {
+    font-family: 'Pixeloid-sans';
+    src: url(/fonts/pixeloidsans.ttf);
+}
+
+@font-face {
+    font-family: 'sk-concretica';
+    src: url(/fonts/sk-concretica-trial.ttf);
+}
+
+/*//////////////////////////////////*/
+/*/////// CUSTOM PROPERTIES ////////*/
+/*/////////////////////////////////*/
+
+:root {
+	/* color */
+    --background-color: #f7f6f5;
+	--primary-color: #0554F2;
+    --primary-color2:  #374c8c;
+    --secundair-color:  #F2C7BD;
+    --secundair-color2: #F2BBB6;
+    --basic-color: black;
+    --extra-color: #BFBFBF;
+    /*font style */
+    --fontfamily-kop1: 'Buljirya', Arial, Helvetica;
+    --fontfamily-kop2: 'Pixeloid-sans', Arial, Helvetica;
+    --fontfamily-kop3: 'ppneuemachina', Arial, Helvetica;
+    --fontfamily-smalltext1: 'sk-concretica', sans-serif;
+    --fontfamily-smalltext2: 'Hanken-grotesk', sans-serif;
+    --space-letter: 1px;
+
+    /*font size */
+    --titel-text-size: 5em;
+    --kop-text-size: 2em;
+    --small-text-size: 1em;
+}
+
+body {
+    height: 100%;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    display: grid;
+    grid-template-rows: 1fr auto; 
+    height: 100vh;
+}
+
+
+/*/////////////////////////*/
+/*/////// navigatie ///////*/
+/*////////////////////////*/
+
+.container-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 0 2em;
+    background-image: url(/images/asfalt-light.png);
+    background-color: rgba(247, 246, 245, 0.6); /* Semi-transparante achtergrond */
+    backdrop-filter: blur(6px); /* Blur effect op de achtergrond */
+    z-index: 900; /* Zorg ervoor dat het boven andere elementen staat */
+    transition: all 0.3s ease; /* Voor smooth transitions */
+}
+
+
+/* Standaard uit de weergave als de gebruiker naar beneden scrolt */
+.container-menu.hidden {
+    transform: translateY(-100%); /* Schuif de navigatie naar boven uit beeld */
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 15vh;
+}
+
+/*/// Logo aan de linkerkant ///*/
+.nav-left-wrapper .logo-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    width: 4em;
+    height: auto;
+}
+
+.text-underlogo {
+    font-size: 0.9em;
+    font-family: var(--fontfamily-smalltext2);
+    color: rgb(169, 169, 169);
+}
+
+/*/// Navigatie in het midden ///*/
+.nav-pill-wrapper {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+/*/// Basisstijl voor de navigatielinks ///*/
+.nav-pill a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #000;
+    font-size: var(--small-text-size);
+    font-family: 'sk-concretica';
+    letter-spacing: var(--space-letter);
+    font-weight: 500;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease, border-bottom 0.3s ease; /* Soepele overgang */
+}
+
+
+/*/// Stijl voor de actieve link ///*/
+.nav-pill a.active {
+    color: #000;
+    border-bottom: 2px solid #000; /* Zwart lijntje onder de actieve link */
+}
+
+/*/// Stijl voor de inactieve link ///*/
+.nav-pill a.inactive {
+    color: #999; /* Lichtgrijs voor de inactieve link */
+}
+
+.nav-pill a:hover {
+    color: #007bff;
+}
+
+/*/// Socials aan de rechterkant ///*/
+.nav-right-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.socials-wrapper {
+    display: flex;
+    gap: 1.2em;
+}
+
+.socials-wrapper a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext1);
+    letter-spacing: var(--space-letter);
+    transition: color 0.3s;
+}
+
+.socials-wrapper a:hover {
+    color: #007bff;
+}
+
+.socials-wrapper svg {
+    margin-left: 5px;
+    width: 1.2em;
+    height: auto;
+    transition: stroke 0.3s;
+}
+
+.socials-wrapper a:hover svg {
+    stroke: #007bff;
+}
+
+/*/// intro main ///*/
+
+.container-intro {
+    margin: 10em 2em;
+    display: flex;
+    align-items: flex-start;
+}
+
+.intro-tekst {
+    display: flex;
+    flex-direction: column;
+    opacity: 0; /* Begin met een lage opaciteit */
+    animation: fadeIn 1.5s forwards; /* Voeg animatie toe */
+}
+
+/*/// Fade-in animatie ///*/
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Begin met 0 opaciteit */
+    }
+    to {
+        opacity: 1; /* Eindig met volledige opaciteit */
+    }
+}
+
+.intro-tekst p:nth-of-type(1) {
+    font-family: var(--fontfamily-kop3);
+    font-size: 6em;
+    opacity: 0; /* Begin met een lage opaciteit */
+    animation: fadeIn 1s forwards; /* Voeg animatie toe */
+    animation-delay: 0s; /* Geen vertraging voor de eerste tekst */
+}
+
+.intro-tekst p:nth-of-type(3) {
+    font-family: var(--fontfamily-kop2);
+    font-size: 6em;
+    color: var(--primary-color);
+    opacity: 0; /* Begin met een lage opaciteit */
+    animation: fadeIn 1s forwards; /* Voeg animatie toe */
+    animation-delay: 1s; /* Voeg vertraging toe voor de tweede tekst */
+}
+
+.gif-oog {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 0;
+    margin: 0;
+}
+
+.gif-oog img {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.arrowdown {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    animation: bounce 1.5s infinite;
+    animation-timing-function:cubic-bezier(0.5, 0, 0.5, 1); 
+    margin: -15em 0 5em 0;
+}
+
+.arrowdown img {
+    width: 5em;
+    height: auto;
+    transition: filter 0.2s ease; /* Maak de kleurverandering soepel */
+}
+
+/*/// Bounce animatie met pauze ///*/
+@keyframes bounce {
+    0%, 20% {
+        transform: translateY(0); /* Begin op de originele positie */
+        filter: brightness(0); /* Begin met zwart */
+    }
+    40% {
+        transform: translateY(-20px); /* Verhoog de afstand naar omhoog */
+        filter: brightness(0.5); /* Maak de pijl grijs */
+    }
+    60% {
+        transform: translateY(-20px); /* Blijf op het hoogste punt */
+        filter: brightness(0.5); /* Blijf grijs */
+    }
+    80% {
+        transform: translateY(0); /* Beweeg terug naar de originele positie */
+        filter: brightness(0); /* Maak de pijl zwart */
+    }
+    100% {
+        transform: translateY(0); /* Zorg ervoor dat het op de originele positie eindigt */
+        filter: brightness(0); /* Zorg ervoor dat het zwart eindigt */
+    }
+}
+
+/*/// Hover effect ///*/
+.arrowdown:hover {
+    filter: brightness(0.5); /* Maak de pijl grijs bij hover */
+}
+
+/*/// scroll text ///*/
+
+.scroll-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+    height: 30vh;
+    overflow: hidden; 
+    background-color: var(--primary-color);
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+
+.scroll-text h1 {
+    font-family: var(--fontfamily-kop3);
+    color: white;
+    font-size: 8em;
+    font-weight: 300;
+    white-space: nowrap; /* Zorg ervoor dat de tekst op één regel blijft */
+    position: relative;
+    transition: transform 0.1s ease-out; /* Vloeiende overgang voor het verschuiven */
+    margin: 0;
+    transform: translateX(0); /* Startpositie */
+    will-change: transform; /* Verbetert de performance */
+}
+
+
+/*/// project section ///*/
+
+.container-project {
+    width: 100%;
+    background-color: transparent;
+    background: url(/images/noisey-brackground.png) repeat,linear-gradient(to bottom, #f7f6f5 0%, #f7f6f5 30%, #F2C7BD 60%, #F2C7BD 100%);
+    background-blend-mode: overlay;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2em; 
+}
+
+.projects-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: 100%;
+    height: auto;
+    gap: 2em;
+    margin-bottom: 10em;
+}
+
+.projects-section a {
+    text-decoration: none;
+    color: #000;
+}
+
+.projects-section h2 {
+    grid-column: 1;
+    align-self: flex-start;
+    font-family: var(--fontfamily-kop3);
+    font-size: var(--kop-text-size);
+    letter-spacing: var(--space-letter);
+    margin: 2em 0;
+}
+
+/* Standaard verborgen voordat animatie begint */
+.projects-section img,
+.projects-section h3,
+.projects-section p {
+    opacity: 0;
+    transform: translateY(50px); /* Verschoven naar beneden */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Vloeiende overgang */
+}
+
+/* Wanneer zichtbaar in viewport, afbeeldingen komen direct */
+.project-visible img {
+    opacity: 1;
+    transform: translateY(0); /* Verplaatsing terug naar normale positie */
+    transition-delay: 0s; /* Geen vertraging voor afbeeldingen */
+}
+
+/* Tekst (h3, p) met een vertraging */
+.project-visible h3,
+.project-visible p {
+    opacity: 1;
+    transform: translateY(0); /* Verplaatsing terug naar normale positie */
+    transition-delay: 0.4s; /* Voeg een vertraging toe voor de tekstanimatie */
+}
+
+.projects-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    transition: border-radius 0.3s ease-in-out, transform 0.3s ease-in-out; 
+}
+
+
+.project-item img:hover {
+    border-radius: 50%;
+    border-radius: 50%; 
+}
+
+
+.projects-section h3 {
+    margin-top: 1em;
+    font-family: var(--fontfamily-smalltext1);
+    font-size: var(--kop-text-size);
+    letter-spacing: var(--space-letter);
+    border-top: 2px solid black;
+    padding-top: 0.5em;
+}
+
+.projects-section p {
+    font-family: var(--fontfamily-smalltext2);
+    font-size: var(--small-text-size);
+}
+
+.project-1 {
+    grid-column: 1;
+    grid-column-end: 4;
+    align-self: flex-start;
+}
+
+.project-2 {
+    grid-column: 4;
+    grid-column-end: 7;
+    align-self: center;
+    margin-top: 10em;
+}
+
+.project-3 {
+    grid-column: 1;
+    grid-column-end: 4;
+    align-self: center;
+    margin-top: -6em;
+}
+
+.project-4 {
+    grid-column: 4;
+    grid-column-end: 7;
+    align-self: flex-end;
+}
+
+/* Standaard styling voor projecten */
+.project-item {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Styling voor de hover-button */
+.hover-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none; /* Verborgen totdat de gebruiker hovert */
+    z-index: 1; /* Zorg ervoor dat de button boven andere elementen staat */
+    pointer-events: none; /* Button volgt muis zonder interactie te blokkeren */
+}
+
+.hover-button a {
+    display: flex; /* Flexbox voor het uitlijnen van tekst en icoon */
+    align-items: center; /* Center de inhoud verticaal */
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-size: var(--small-text-size);
+    text-decoration: none;
+    font-family: var(--fontfamily-smalltext1);
+    letter-spacing: var(--space-letter);
+    transition: background-color 0.3s ease;
+}
+
+.hover-button a svg {
+    width: 1.2em;
+    height: auto;
+    margin-left: 8px; /* Ruimte tussen de tekst en het icoon */
+    fill: currentColor; /* Zorgt ervoor dat het icoon dezelfde kleur als de tekst heeft */
+}
+
+/* Laat de hover-button alleen zien bij hoveren */
+.project-item:hover ~ .hover-button {
+    display: block;
+}
+
+/*//////////sectie eigen werk//////////*/
+
+.freetime-work-section {
+    position: relative;
+    background-color: transparent;
+    background: url(/images/noisey-brackground.png) repeat, #F2C7BD;
+    background-blend-mode: overlay;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    padding:  5em 2em;
+}
+
+.freetime-work-section.scrolled-in {
+    background-color: #3b3b3b; /* Kies een doelachtergrondkleur */
+    color: var(--secundair-color); /* Kies een doelkleur voor de tekst */
+}
+
+.freetime-work-section h4 {
+    position: relative;
+    padding-bottom: 0.5em;
+    font-family: var(--fontfamily-kop3);
+    font-size: var(--kop-text-size); 
+    letter-spacing: var(--space-letter);
+}
+
+.freetime-work-section h4::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--secundair-color); /* Kleur van de lijn */
+    transition: width 0.5s ease; /* Snelheid en vloeiendheid van de animatie */
+}
+
+.freetime-work-section h4.scrolled-in::after {
+    width: 95vw;
+}
+
+.img-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 1.5em;
+    margin-top: 2em;
+}
+
+.img-gallery img {
+    width: 100%;
+    border-radius: 15px;
+    height: auto;
+    margin: 0;
+}
+
+.free-work {
+    opacity: 0;
+    transform: translateY(20px); 
+    animation: fadeIn 0.5s ease-out forwards; 
+}
+
+.free-work p {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    padding-top: 0.5em;
+}
+
+.free-work:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.free-work:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.free-work:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.free-work:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+/* Definieer de fade-in animatie */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.img-gallery .free-work:first-of-type {
+    grid-column: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+    grid-row-end: 2;
+}
+
+
+.img-gallery .free-work:nth-of-type(2) {
+    grid-column: 3;
+    grid-column-end: 5;
+    grid-row: 1;
+    grid-row-end: 3;
+}
+
+.img-gallery .free-work:nth-of-type(3) {
+    grid-column: 5;
+    grid-column-end: 7;
+    grid-row: 1;
+    grid-row-end: 5;
+}
+
+
+.img-gallery .free-work:nth-of-type(4) {
+    grid-column: 1;
+    grid-column-end: 3;
+    grid-row: 2;
+    grid-row-end: 3;
+}
+
+
+/*///////Footer////////////*/
+
+.hele-footer {
+    margin-top: auto;
+    bottom: 0;
+    height: auto;
+}
+
+
+.footer-intro {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    width: 100%;
+    color: white;
+    font-size: var(--titel-text-size);
+    font-family: var(--fontfamily-kop2);
+}
+
+.footer-intro img {
+    margin: 0;
+    padding: 0;
+    width: 3.5em;
+    height: auto;
+    vertical-align: middle;
+}
+
+ footer {
+    display: flex;
+    width: 100%;
+    height: 40vh;
+    background: #000;
+    color: white;
+}
+
+.container-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    width: 100%;
+    padding: 0 10em;
+}
+
+.top-footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-footer-wrapper .logo {
+    width: 10em;
+    height: auto;
+    vertical-align: middle;
+}
+
+.right-footer-wrapper {
+    display: flex;
+    gap: 6em;
+}
+
+.main-footer, .contact-footer {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.main-footer a, .contact-footer a {
+    text-decoration: none;
+    color: white;
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext1);
+    letter-spacing: var(--space-letter);
+}
+
+.main-footer p, .contact-footer p {
+    font-size: 0.8em;
+    font-family: var(--fontfamily-smalltext2);
+    color: var(--extra-color);
+}
+
+.contact-footer a {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.contact-footer svg {
+    vertical-align: middle;
+    max-width: 100%;
+    display: inline-block;
+    width: 1.2em;
+}
+
+.bottom-footer-wrapper {
+    display: flex;
+    height: 20vh;
+    align-items: center;
+}
+
+.copyrights {
+    font-family: var(--fontfamily-smalltext1);
+    font-size: var(--small-text-size);
+    letter-spacing: var(--space-letter);
+}
+
+/* Responsive work page */ 
+@media screen and (min-width: 80rem){
+}
+
+
+/*////////////About moi/////////////*/
+
+.intro-aboutme {
+    height: 80vh;
+    width: 100%;
+    padding: 5em 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Begin met een lage opaciteit */
+    animation: fadeIn 1.5s forwards; /* Voeg animatie toe */
+}
+
+.container-aboutme {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+    z-index: 0;
+    gap: 1.5em;
+}
+
+.container-aboutme  h1 {
+    font-size: 7em;
+    font-family: var(--fontfamily-kop2);
+    font-weight: 300;
+    grid-column: 1;
+    grid-column-end: 6;
+    grid-row: 1;
+    grid-row-end: 2;
+    z-index: 1;
+    position: absolute;
+}
+
+.container-aboutme h2 {
+    font-size: 6em;
+    font-family: var(--fontfamily-kop3);
+    color: var(--background-color);
+    font-weight: 300;
+    grid-column: 2;
+    grid-column-end: 5;
+    grid-row-end: 3;
+    grid-row: 2;
+    z-index: 1;
+    position: absolute;
+    align-self: center;
+}
+
+
+.container-aboutme p {
+    font-family: var(--fontfamily-smalltext2);
+    grid-column: 5;
+    grid-row: 5;
+    align-self: flex-end;
+}
+
+.container-img-aboutme {
+    grid-column: 2;
+    grid-column-end: 5;
+    grid-row: 5;
+    grid-row-end: 6;
+}
+
+.container-img-aboutme img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.line {
+    text-align: center;
+    height: 4rem;
+    overflow: hidden;
+    padding: 0;
+    margin-bottom: 1em;
+}
+
+/*bron: https://codepen.io/alvarotrigo/pen/NWvQObB*/
+/* flipY class and keyframes*/
+.flipY {
+  animation-name: spin, depth;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  font-size: var(--kop-text-size);
+  font-family: var(--fontfamily-kop3);
+  color: var(--primary-color);
+}
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-360deg);
+  }
+}
+@keyframes depth {
+  0% {
+    text-shadow: 0 0 black;
+  }
+  25% {
+    text-shadow: 1px 0 black, 2px 0 black, 3px 0 black, 4px 0 black, 5px 0 black;
+  }
+  50% {
+    text-shadow: 0 0 black;
+  }
+  75% {
+    text-shadow: -1px 0 black, -2px 0 black, -3px 0 black, -4px 0 black,
+      -5px 0 black;
+  }
+  100% {
+    text-shadow: 0 0 black;
+  }
+}
+
+.column-aboutme {
+    width: 100%;
+    margin-bottom: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-column-aboutme {
+    width: 40vw;
+}
+
+.container-column-aboutme p {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    font-weight: 300;
+    line-height: 1.5em;
+}
+
+/*///////Skills table//////////*/
+
+.container-table-skills {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 5em 0 10em 0;
+}
+
+.skills-table {
+    border-collapse: collapse;
+    font-size: 1.5em;
+}
+
+.skills-table th {
+    font-family: var(--fontfamily-kop3);
+    padding: 1em;
+    text-align: left;
+    border-bottom: 2px solid var(--secundair-color);
+}
+
+.skills-table th:nth-of-type(1) {
+    border-right: 2px solid var(--secundair-color);
+}
+
+.skills-table td {
+    font-family: var(--fontfamily-smalltext2);
+    padding: 1em;
+    border-bottom: 2px solid var(--secundair-color);
+}
+
+.skills-table tr td:first-child {
+    border-right: 2px solid var(--secundair-color);
+}
+
+/*////// Project 1 page intro ////////*/
+
+/*/////go back button//////*/
+
+.go-back {
+    display: flex;
+    margin: 2em;
+    height: auto;
+    position: fixed;
+    z-index: 1;
+}
+
+.go-back a {
+    display: flex; 
+    align-items: center; 
+    text-decoration: none; 
+    font-family: var(--fontfamily-smalltext2); 
+    font-size: var(--kop-text-size); 
+    color: #000; 
+    transition: transform 0.3s ease; /* Smooth overgang van de beweging */
+}
+
+.go-back img {
+    width: 1.5em; /* Pas de grootte van het icoon aan */
+    height: auto;
+    margin-right: 5px; /* Ruimte tussen het icoon en het woord 'Back' */
+    transition: transform 0.3s ease; /* Smooth overgang van de beweging */
+}
+
+.go-back a:hover, .go-back img:hover {
+    transform: translateX(-10px);
+}
+
+/* Algemene opmaak voor de video-container */
+.video-background-container {
+    position: relative;
+    width: 100%;
+    height: 80vh; /* Hoogte van de viewport */
+    overflow: hidden;
+}
+
+.project-text-intro {
+    padding-top: 2em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-family: var(--fontfamily-kop2);
+    font-size: var(--titel-text-size);
+    font-weight: 300;
+    color: var(--primary-color2);
+}
+
+/* Opmaak voor de video */
+.background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85vw; 
+    height: auto; 
+    object-fit: cover; 
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    border: black solid 1px;
+}
+
+/*////// Column project ////////*/
+
+.info-project {
+    padding: 5em 2em;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-project h2 {
+    width: 80vw; 
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    letter-spacing: var(--space-letter);
+    margin: 0.5em 0;
+    color: var(--primary-color2);
+}
+
+.column-project-container {
+    columns: 2;
+    width: 80vw;
+    gap: 2em;
+    break-inside: avoid;
+}
+
+.column-project-container p {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    line-height: 1.5em;
+    vertical-align: baseline;
+}
+
+.column-project-container p:first-child::first-letter  {
+    font-size: 3em; /* Vergroot de letter */
+    font-weight: bold; /* Maakt de letter vet */
+    float: left; /* Zorgt ervoor dat de tekst ernaast stroomt */
+    line-height: 1; /* Zorgt ervoor dat de grote letter goed uitgelijnd is */
+    margin-right: 0.1em; /* Een kleine ruimte tussen de grote letter en de rest van de tekst */
+}
+
+.column-project-container h2 {
+    margin-bottom: 0.5em;
+}
+
+
+/*////////link website button///////*/
+
+.text-seeproject {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-seeproject a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext1);
+    letter-spacing: var(--space-letter);
+    padding: 15px 20px;
+    border-radius: 50px;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    transition: color 0.5s ease;
+}
+
+.text-seeproject svg {
+    width: 1.2em;
+}
+
+.text-seeproject a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+
+/*/////////Proces sectie project 1///////////*/
+
+.proces-sectie {
+    height: 100%;
+    width: 100%;
+    padding: 5em 2em;
+}
+
+.proces-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+}
+
+.proces-sectie h3 {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+}
+
+.proces-sectie p:nth-of-type(1) {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    grid-column: 1;
+    grid-row: 1;
+    margin: 1em 0;
+}
+
+.proces-sectie p:nth-of-type(2) {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    grid-column: 2;
+    margin: 1em 0;
+}
+
+.proces-sectie img:nth-of-type(1) {
+    width: 100%;
+    height: auto;
+    grid-column: 1;
+    grid-row: 1;
+    grid-row-end: 3;
+    align-self: flex-end;
+    border-radius: 15px;
+    border: 2px solid var(--primary-color2);
+}
+
+.proces-sectie img:nth-of-type(2) {
+    width: 60%;
+    height: auto;
+    border-radius: 15px;
+    border: 2px solid var(--primary-color2);
+}
+
+/*////////carousel van afbeeldingen//////////*/
+
+.proces-schetsen {
+    height: 50vh;
+    margin: 0;
+    padding: 5em 0;
+}
+
+.proces-schetsen h4 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    letter-spacing: var(--space-letter);
+    margin: 0.5em 1em;
+}
+
+.proces-schetsen p {
+    margin: 0 0 1em 2em;
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+}
+
+
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Styling voor de afbeeldingcontainer */
+.container-schetsen {
+    display: flex;
+    gap: 0.5em; /* ruimte tussen de afbeeldingen */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap; /* Zorgt ervoor dat de items op één regel blijven */
+}
+
+.container-schetsen img {
+    width: 25em;
+    height: 20em;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Styling voor de pijltjes */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--secundair-color); /* gebruik een fallback kleur als var niet werkt */
+    border: none;
+    border-radius: 50%;
+    padding: 1em;
+    cursor: pointer;
+    z-index: 10;
+    margin: 0 2em;
+}
+
+/* Specifieke positionering voor de linker en rechter pijl */
+.carousel-left-arrow {
+    left: 0.5em;
+}
+
+.carousel-right-arrow {
+    right: 0.5em;
+    transform: translateY(-50%) rotate(180deg); /* Om de pijl naar rechts te laten wijzen */
+}
+
+/* Pas de grootte van het SVG-pijltje aan */
+.carousel-arrow img {
+    width: 3em;
+    height: 3em;
+}
+
+/*/////////kalenderblad/////////*/
+
+.container-finaleschets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+.finale-schets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60vw; 
+    height: auto;
+    position: relative;
+    overflow: hidden; 
+    border-radius: 15px; 
+}
+
+
+.finale-schets img {
+    width: 100%; 
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease-in-out; /* Optionele zoom-in effect */
+}
+
+/* Overlay stijl, standaard transparant */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Pas de kleur en doorzichtigheid aan naar wens */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 15px; /* Zorg dat de overlay dezelfde ronding heeft als de afbeelding */
+    z-index: 1;
+}
+
+/* Standaard verborgen tekst */
+.text-finaleschets {
+    position: absolute;
+    z-index: 2;
+    width: 80%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    color: white;
+}
+
+/* Stijl van de tekst */
+.text-finaleschets h4 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    margin: 0;
+}
+
+.text-finaleschets p {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    line-height: 1.5em;
+    margin-top: 0.5em;
+}
+
+/* Hover-effect: maak de overlay en tekst zichtbaar */
+.finale-schets:hover .overlay {
+    opacity: 1;
+}
+
+.finale-schets:hover .text-finaleschets {
+    opacity: 1;
+}
+
+.finale-schets:hover img {
+    transform: scale(1.05); /* Optionele zoom-in effect op afbeelding */
+}
+
+/*////// Project 2 page intro ////////*/
+
+.website-remade-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+}
+
+.website-remade-container img  {
+    width: 70%;
+    height: auto;
+    border-radius: 15px;
+    
+}
+
+/*////////Download project 2///////////*/
+
+.download-project {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.download-project  a {
+    text-decoration: none;
+}
+
+.download-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 15px 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    text-decoration: none;
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext1);
+}
+
+
+.download-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.download-button:active {
+    box-shadow: -1px 2px 13px 3px rgba(55,76,140,0.75) inset;
+    -webkit-box-shadow: -1px 2px 13px 3px rgba(55,76,140,0.75) inset;
+    -moz-box-shadow: -1px 2px 13px 3px rgba(55,76,140,0.75) inset;;
+}
+
+
+/*/////////Proces sectie project 2///////////*/
+
+/*///////////mindmap////////////////////////*/
+
+.mindmap-sectie {
+    padding: 5em 2em;
+}
+
+.mindmap-sectie h3 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    margin-bottom: 0.5em;
+}
+
+.mindmap-sectie p {
+    width: 55vw;
+    line-height: 1.5em;
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+}
+
+.container-mindmap {
+    margin: 2em 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1em;
+}
+
+.mindmap-image-container {
+    width: 100%; 
+    height: auto;
+    overflow: hidden; 
+    border-radius: 15px;
+}
+
+.container-mindmap img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 15px;
+}
+
+.mindmap-image-container img:hover {
+    transform: scale(1.2); 
+}
+
+/*//////////Sitemap project 2/////////*/
+
+.sitemap-sectie {
+    padding: 2em;
+}
+
+.sitemap-sectie h3 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    margin: 1em 0;
+}
+
+.sitemap-wireframe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-sitemap img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+/*//////////scherm schetsen project 2/////////*/
+
+.proces2-sectie {
+    width: 100%;
+    padding: 5em 2em;
+}
+
+.proces2-sectie h3 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    margin: 2em 0;
+}
+
+.schets2-proces {
+    position: relative;
+    margin: 2em;
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr;
+}
+
+.schets2-proces img {
+    width: 80%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    border: 1px var(--primary-color2) solid;
+}
+
+.schets2-proces p {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    background-color: #f2bbb695;
+    padding: 0.5em;
+    border-radius: 8px;
+    position: absolute;
+}
+
+.schets2-proces img:nth-of-type(1) {
+    transform: rotate(-5deg);
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 1;
+    grid-row-end: 3;
+}
+
+.schets2-proces p:nth-of-type(1) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+    grid-row-end: 3;
+    margin: -1em 0;
+    transform: rotate(-3deg);
+}
+
+.schets2-proces img:nth-of-type(2) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 1;
+    grid-row-end: 3;
+}
+
+.schets2-proces p:nth-of-type(2) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 1;
+    grid-row-end: 3;
+    margin: -2em 0;
+}
+
+
+.schets2-proces img:nth-of-type(3) {
+    transform: rotate(5deg);
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row: 1;
+    grid-row-end: 3;
+}
+
+.schets2-proces p:nth-of-type(3) {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row: 1;
+    grid-row-end: 3;
+}
+
+
+.schets2-proces img:nth-of-type(4) {
+    transform: rotate(-5deg);
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row: 3;
+    grid-row-end: 4;
+    align-self: end;
+}
+
+.schets2-proces p:nth-of-type(4) {
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row: 3;
+    grid-row-end: 5;
+    background-color: var();
+    padding: 0.5em;
+    border-radius: 8px;
+    z-index: 1;
+    transform: rotate(-5deg);
+}
+
+
+.schets2-proces img:nth-of-type(5) {
+    transform: rotate(5deg);
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 3;
+    grid-row-end: 4;
+}
+
+.schets2-proces p:nth-of-type(5) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 3;
+    grid-row-end: 5;
+    z-index: 1;
+    transform: rotate(5deg);
+    margin: -2em 0;
+}
+
+
+.schets2-proces img:nth-of-type(6) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 3;
+    grid-row-end: 4;
+}
+
+.schets2-proces p:nth-of-type(6) {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row: 3;
+    grid-row-end: 5;
+    z-index: 1;
+}
+
+.schets2-proces img:nth-of-type(7) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 3;
+    grid-row-end: 5;
+    align-self: flex-end;
+    margin: -5em 0;
+    transform: rotate(5deg);
+}
+
+.schets2-proces p:nth-of-type(7) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 3;
+    grid-row-end: 5;
+    z-index: 1;
+    align-self: center;
+}
+
+/*///////////Fade in animatie schetsen//////////*/
+
+.schets-image, .schets-text {
+    opacity: 0;
+    transform: translateY(0px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Actieve animatiestijlen */
+.schets-image.visible, .schets-text.visible {
+    opacity: 1;
+    transform: translateY(20px);
+}
+
+/* Specifieke vertraging voor de tekst */
+.schets-text {
+    transition-delay: 0.3s; /* Vertraging zodat tekst later verschijnt dan de afbeelding */
+}
+
+/*///////////Lo-fi wireframes project 2////////*/
+
+.lofi-sectie {
+    padding: 5em 2em;
+}
+
+.lofi-sectie h3 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    margin: 2em 0;
+}
+
+
+.lofi-wireframes-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5em;
+}
+
+.lofi-wireframes-container img {
+    width: 20vw;
+    height: auto;
+    border-radius: 15px;
+}
+
+
+/*///////////moodboard project 2////////*/
+
+.moodboard-sectie {
+    padding: 2em;
+    height: 100%;
+}
+
+.moodboard-sectie h3 {
+    margin: 0.5em 0;
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+}
+
+.moodboard-sectie p {
+    font-family: var(--fontfamily-smalltext2);
+    margin: 1em 0;
+}
+
+.container-moodboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-moodboard img {
+    width: 70%;
+    height: auto;
+    border-radius: 15px;
+}
+
+/*///////////kleurpalet project 2///////////*/
+
+.styleguide-sectie {
+    padding: 5em 2em;
+    height: 100%;
+}
+
+.styleguide-sectie h3 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid black;
+    padding-bottom: 0.5em;
+}
+
+.container-styleguide p {
+    font-family: var(--fontfamily-smalltext2);
+}
+
+.kleurpalet-container {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 2em;
+}
+
+.kleurpalet-container p {
+    align-self: center;
+}
+
+.rond-1 {
+    padding: 5em;
+    width: 10vw;
+    height: auto;
+    background-color: #D95032;
+    border-radius: 50%;
+}
+
+.rond-2 {
+    padding: 5em;
+    width: 10vw;
+    height: auto;
+    background-color: #F23005;
+    border-radius: 50%;
+}
+
+.rond-3 {
+    padding: 5em;
+    width: 10vw;
+    height: auto;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.rond-4 {
+    padding: 5em;
+    width: 10vw;
+    height: auto;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.rond-5 {
+    padding: 5em;
+    width: 10vw;
+    height: auto;
+    background-color: #E2DED5;
+    border-radius: 50%;
+}
+
+.text-button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.1fr 1fr;
+    width: 100%;
+    gap: 1.5em;
+    margin: 5em 0;
+}
+
+.text-button-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.text-button-container img:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.text-button-container img:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.text-button-container p:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.text-button-container p:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+
+/*////////////Figma prototype embed//////////*/
+
+.container-figma-prototype {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5em 0;
+}
+
+.container-figma-prototype h4 {
+    margin-bottom: 0.5em;
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+}
+
+/*//////////grid layout project 3///////////*/
+
+.beeldentaal-sectie {
+    height: 100%;
+    padding: 5em 2em;
+}
+
+.beeldentaal-sectie h3 {
+    font-size: var(--kop-text-size);
+    font-family: var(--fontfamily-kop3);
+    margin-bottom: 0.5em;
+}
+
+.container-beeldentaal {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.2fr 1fr;
+    gap: 1em;
+}
+
+.container-beeldentaal img{
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.container-beeldentaal p {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    line-height: 1.5em;
+}
+
+.container-beeldentaal img:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
