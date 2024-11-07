@@ -30,3 +30,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+////////Video laden///////////
+
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.background-video');
+
+    // Zorg ervoor dat de video na het laden van de pagina langzaam inkomt
+    video.style.opacity = 1;
+});
+

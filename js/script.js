@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }, {
-        threshold: 0.6 // De hele sectie moet in beeld zijn
+        threshold: 0.5 // De hele sectie moet in beeld zijn
     });
 
     observer.observe(section);
