@@ -60,6 +60,7 @@ html {
 
     /*font size */
     --titel-text-size: 5em;
+    --proces-section-text: 10em;
     --kop-text-size: 2em;
     --small-text-size: 1em;
 }
@@ -444,7 +445,22 @@ body {
     grid-column: 4;
     grid-column-end: 7;
     align-self: flex-end;
+    margin-top: 10em;
 }
+
+.project-5 {
+    grid-column: 1;
+    grid-column-end: 4;
+    align-self: flex-start;
+}
+
+.project-6 {
+    grid-column: 4;
+    grid-column-end: 7;
+    align-self: flex-end;
+    margin-top: 10em;
+}
+
 
 /* Standaard styling voor projecten */
 .project-item {
@@ -467,11 +483,11 @@ body {
     align-items: center; /* Center de inhoud verticaal */
     background-color: var(--primary-color);
     color: white;
-    padding: 15px 20px;
+    padding: 0.8em 1.5em;
     border-radius: 50px;
     font-size: var(--small-text-size);
     text-decoration: none;
-    font-family: var(--fontfamily-smalltext1);
+    font-family: var(--fontfamily-smalltext2);
     letter-spacing: var(--space-letter);
     transition: background-color 0.3s ease;
 }
@@ -907,23 +923,19 @@ body {
 }
 
 .go-back a {
+    transition: transform 0.3s ease; /* Smooth overgang van de beweging */
+}
+
+.go-back a svg {
     display: flex; 
     align-items: center; 
     text-decoration: none; 
-    font-family: var(--fontfamily-smalltext2); 
     font-size: var(--kop-text-size); 
-    color: #000; 
     transition: transform 0.3s ease; /* Smooth overgang van de beweging */
+    fill: black;
 }
 
-.go-back img {
-    width: 1.5em; /* Pas de grootte van het icoon aan */
-    height: auto;
-    margin-right: 5px; /* Ruimte tussen het icoon en het woord 'Back' */
-    transition: transform 0.3s ease; /* Smooth overgang van de beweging */
-}
-
-.go-back a:hover, .go-back img:hover {
+.go-back a:hover, .go-back svg:hover {
     transform: translateX(-10px);
 }
 
@@ -933,17 +945,6 @@ body {
     width: 100%;
     height: 100vh; /* Hoogte van de viewport */
     overflow: hidden;
-}
-
-.project-text-intro {
-    padding-top: 2em;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    font-family: var(--fontfamily-kop2);
-    font-size: var(--titel-text-size);
-    font-weight: 300;
-    color: var(--primary-color2);
 }
 
 /* Opmaak voor de video */
@@ -964,22 +965,14 @@ body {
 /*////// Column project ////////*/
 
 .info-project {
-    padding: 5em 2em;
+    margin: 10em 2em;
     display: flex;
-    height: 100%;
     flex-direction: column;
     align-items: center;
 }
 
 .info-project h2 {
-    width: 80vw; 
-    align-items: flex-start;
-    margin-bottom: 0.5em;
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    letter-spacing: var(--space-letter);
-    margin: 0.5em 0;
-    color: var(--primary-color2);
+  display: none;
 }
 
 .column-project-container {
@@ -994,6 +987,7 @@ body {
     font-family: var(--fontfamily-smalltext2);
     line-height: 1.5em;
     vertical-align: baseline;
+    letter-spacing: var(--space-letter);
 }
 
 .column-project-container p:first-child::first-letter  {
@@ -1023,9 +1017,9 @@ body {
     text-decoration: none;
     color: #000;
     font-size: var(--small-text-size);
-    font-family: var(--fontfamily-smalltext1);
+    font-family: var(--fontfamily-smalltext2);
     letter-spacing: var(--space-letter);
-    padding: 15px 20px;
+    padding: 0.8em 1.5em;
     border-radius: 50px;
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
@@ -1256,27 +1250,70 @@ body {
 
 /*////// Project 2 page intro ////////*/
 
-.website-remade-container {
+.website-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2em;
+    margin-bottom: 3em;
+
 }
 
-.website-remade-container img  {
-    width: 70%;
+.website-container img  {
+    width: 100%;
     height: auto;
-    border-radius: 15px;
-    
+}
+
+/*//////// project kenmerken ////////*/
+
+.project-type {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 0;
+    height: 0;
+    margin: 4em 2em;
+}
+
+.project-type p {
+    padding: 0.8em 1.5em;
+    border: rgb(146, 146, 146) 2px dashed;
+    border-radius: 50px;
+    font-family: var(--fontfamily-smalltext2);
+    font-size: var(--small-text-size);
+    color: rgb(146, 146, 146);
+}
+
+.container-type-project-table {
+    margin: 0 2em;
+    display: flex;
+    flex-direction: column; 
+    gap: 0.8em; 
+}
+
+.container-type-project-table h1, p {
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+}
+
+.table-typeproject h1 {
+    width: 150px; 
+    flex-shrink: 0; 
+  }
+
+  .table-typeproject p {
+    flex: 1; /* Zorgt ervoor dat p de resterende ruimte inneemt */
+  }
+
+.table-typeproject {
+    display: flex;
+    align-items: baseline;
 }
 
 /*////////Download project 2///////////*/
 
 .download-project {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5em;
+    margin: 2em 2em;
 }
 
 .download-project  a {
@@ -1287,14 +1324,14 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5em;
-    padding: 15px 20px;
+    padding: 0.8em 1.5em;
     border: 2px solid var(--primary-color);
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.5s ease;
     text-decoration: none;
     font-size: var(--small-text-size);
-    font-family: var(--fontfamily-smalltext1);
+    font-family: var(--fontfamily-smalltext2);
 }
 
 
@@ -1311,478 +1348,78 @@ body {
 
 
 /*/////////Proces sectie project 2///////////*/
-
-/*///////////mindmap////////////////////////*/
-
-.mindmap-sectie {
-    padding: 5em 2em;
+.proces {
+    margin: 6em 0 0 0;
 }
 
-.mindmap-sectie h3 {
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    margin-bottom: 0.5em;
-}
-
-.mindmap-sectie p {
-    width: 55vw;
-    line-height: 1.5em;
-    font-size: var(--small-text-size);
-    font-family: var(--fontfamily-smalltext2);
-}
-
-.container-mindmap {
-    margin: 2em 0;
+.titel-proces {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1em;
+    align-items: baseline;
+    gap: 3em;
+    margin: 0 2em;
+    border-bottom: 1px dashed var(--secundair-color2);
 }
 
-.mindmap-image-container {
-    width: 100%; 
-    height: auto;
-    overflow: hidden; 
-    border-radius: 15px;
+.proces .titel-proces h3 {
+    font-size: var(--proces-section-text);
+    font-family: var(--fontfamily-kop2);
+    font-weight: 200;
 }
 
-.container-mindmap img {
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-    border-radius: 15px;
-}
-
-.mindmap-image-container img:hover {
-    transform: scale(1.2); 
-}
-
-/*//////////Sitemap project 2/////////*/
-
-.sitemap-sectie {
-    padding: 2em;
-}
-
-.sitemap-sectie h3 {
+.proces .titel-proces p {
     font-size: var(--kop-text-size);
     font-family: var(--fontfamily-kop3);
-    margin: 1em 0;
+    font-weight: 300;
 }
 
-.sitemap-wireframe {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container-sitemap img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-}
-
-/*//////////scherm schetsen project 2/////////*/
-
-.proces2-sectie {
-    width: 100%;
-    padding: 5em 2em;
-}
-
-.proces2-sectie h3 {
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    margin: 2em 0;
-}
-
-.schets2-proces {
-    position: relative;
-    margin: 2em;
-    display: grid;
-    grid-template-columns: 0.5fr 0.5fr 0.5fr;
-}
-
-.schets2-proces img {
-    width: 80%;
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    border: 1px var(--primary-color2) solid;
-}
-
-.schets2-proces p {
-    font-size: var(--small-text-size);
-    font-family: var(--fontfamily-smalltext2);
-    background-color: #f2bbb695;
-    padding: 0.5em;
-    border-radius: 8px;
-    position: absolute;
-}
-
-.schets2-proces img:nth-of-type(1) {
-    transform: rotate(-5deg);
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row: 1;
-    grid-row-end: 3;
-}
-
-.schets2-proces p:nth-of-type(1) {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row: 1;
-    grid-row-end: 3;
-    margin: -1em 0;
-    transform: rotate(-3deg);
-}
-
-.schets2-proces img:nth-of-type(2) {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 1;
-    grid-row-end: 3;
-}
-
-.schets2-proces p:nth-of-type(2) {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 1;
-    grid-row-end: 3;
-    margin: -2em 0;
-}
-
-
-.schets2-proces img:nth-of-type(3) {
-    transform: rotate(5deg);
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row: 1;
-    grid-row-end: 3;
-}
-
-.schets2-proces p:nth-of-type(3) {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row: 1;
-    grid-row-end: 3;
-}
-
-
-.schets2-proces img:nth-of-type(4) {
-    transform: rotate(-5deg);
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row: 3;
-    grid-row-end: 4;
-    align-self: end;
-}
-
-.schets2-proces p:nth-of-type(4) {
-    grid-column-start: 3;
-    grid-column-end: 3;
-    grid-row: 3;
-    grid-row-end: 5;
-    z-index: 1;
-    transform: rotate(-5deg);
-}
-
-
-.schets2-proces img:nth-of-type(5) {
-    transform: rotate(5deg);
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row: 3;
-    grid-row-end: 4;
-}
-
-.schets2-proces p:nth-of-type(5) {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row: 3;
-    grid-row-end: 5;
-    z-index: 1;
-    transform: rotate(5deg);
-    margin: -2em 0;
-}
-
-
-.schets2-proces img:nth-of-type(6) {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 3;
-    grid-row-end: 4;
-}
-
-.schets2-proces p:nth-of-type(6) {
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row: 3;
-    grid-row-end: 5;
-    z-index: 1;
-}
-
-.schets2-proces img:nth-of-type(7) {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 3;
-    grid-row-end: 5;
-    align-self: flex-end;
-    margin: -5em 0;
-    transform: rotate(5deg);
-}
-
-.schets2-proces p:nth-of-type(7) {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 3;
-    grid-row-end: 5;
-    z-index: 1;
-    align-self: center;
-}
-
-/*///////////Fade in animatie schetsen//////////*/
-
-.schets-image, .schets-text {
-    opacity: 0;
-    transform: translateY(0px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* Actieve animatiestijlen */
-.schets-image.visible, .schets-text.visible {
-    opacity: 1;
-    transform: translateY(20px);
-}
-
-/* Specifieke vertraging voor de tekst */
-.schets-text {
-    transition-delay: 0.3s; /* Vertraging zodat tekst later verschijnt dan de afbeelding */
-}
-
-/*///////////Lo-fi wireframes project 2////////*/
-
-.lofi-sectie {
-    padding: 5em 2em;
-}
-
-.lofi-sectie h3 {
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    margin: 2em 0;
-}
-
-
-.lofi-wireframes-container {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5em;
-}
-
-.lofi-wireframes-container img {
-    width: 20vw;
-    height: auto;
-    border-radius: 15px;
-}
-
-
-/*///////////moodboard project 2////////*/
-
-.moodboard-sectie {
-    padding: 2em;
-    height: 100%;
-}
-
-.moodboard-sectie h3 {
-    margin: 0.5em 0;
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-}
-
-.moodboard-sectie p {
-    font-family: var(--fontfamily-smalltext2);
-    margin: 1em 0;
-}
-
-.container-moodboard {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.container-moodboard img {
-    width: 70%;
-    height: auto;
-    border-radius: 15px;
-}
-
-/*///////////kleurpalet project 2///////////*/
-
-.styleguide-sectie {
-    padding: 5em 2em;
-    height: 100%;
-}
-
-.styleguide-sectie h3 {
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    margin-bottom: 0.5em;
-    border-bottom: 2px solid black;
-    padding-bottom: 0.5em;
-}
-
-.container-styleguide p {
-    font-family: var(--fontfamily-smalltext2);
-}
-
-.kleurpalet-container {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-    margin: 2em;
-}
-
-.kleurpalet-container p {
-    align-self: center;
-}
-
-.rond-1 {
-    padding: 5em;
-    width: 10vw;
-    height: auto;
-    background-color: #D95032;
-    border-radius: 50%;
-}
-
-.rond-2 {
-    padding: 5em;
-    width: 10vw;
-    height: auto;
-    background-color: #F23005;
-    border-radius: 50%;
-}
-
-.rond-3 {
-    padding: 5em;
-    width: 10vw;
-    height: auto;
-    background-color: white;
-    border-radius: 50%;
-    border: 1px solid black;
-}
-
-.rond-4 {
-    padding: 5em;
-    width: 10vw;
-    height: auto;
-    background-color: #000000;
-    border-radius: 50%;
-}
-
-.rond-5 {
-    padding: 5em;
-    width: 10vw;
-    height: auto;
-    background-color: #E2DED5;
-    border-radius: 50%;
-}
-
-.text-button-container {
+.container-proces-img-text  {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 0.1fr 1fr;
+    margin: 0 2em;
+}
+
+.container-image-proces  {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    margin: 2em 0;
+}
+
+.container-image-proces img {
     width: 100%;
-    gap: 1.5em;
+    height: auto;
+    border-radius: 15px;
+}
+
+.container-text-proces {
     margin: 5em 0;
+
 }
 
-.text-button-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-}
-
-.text-button-container img:nth-of-type(1) {
+.container-text-proces p {
     grid-column: 1;
-    grid-row: 2;
+    letter-spacing: var(--space-letter);
+    font-weight: 300;
+    width: 34em;
 }
 
-.text-button-container img:nth-of-type(2) {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.text-button-container p:nth-of-type(1) {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.text-button-container p:nth-of-type(2) {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-
-/*////////////Figma prototype embed//////////*/
-
-.container-figma-prototype {
+.proces-timeline {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    padding: 5em 0;
 }
 
-.container-figma-prototype h4 {
-    margin-bottom: 0.5em;
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-}
-
-/*//////////grid layout project 3///////////*/
-
-.beeldentaal-sectie {
-    height: 100%;
-    padding: 5em 2em;
-}
-
-.beeldentaal-sectie h3 {
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    margin-bottom: 0.5em;
-}
-
-.container-beeldentaal {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 0.2fr 1fr;
-    gap: 1em;
-}
-
-.container-beeldentaal img{
-    width: 100%;
+.proces-timeline img {
+    width: 90%;
     height: auto;
-    border-radius: 15px;
+    margin: 3em 0;
 }
 
-.container-beeldentaal p {
-    font-size: var(--small-text-size);
-    font-family: var(--fontfamily-smalltext2);
-    line-height: 1.5em;
+.figma-prototype {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2em 0 10em 0;
 }
-
-.container-beeldentaal img:nth-of-type(1) {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-
-
-
-
-
 
 
 
