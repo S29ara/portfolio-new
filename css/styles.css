@@ -935,31 +935,12 @@ body {
     fill: black;
 }
 
+.go-back svg path {
+    filter: drop-shadow(2px 2px 30px rgb(255, 255, 255));;
+}
+
 .go-back a:hover, .go-back svg:hover {
     transform: translateX(-10px);
-}
-
-/* Algemene opmaak voor de video-container */
-.video-background-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Hoogte van de viewport */
-    overflow: hidden;
-}
-
-/* Opmaak voor de video */
-.background-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 85vw; 
-    height: auto; 
-    object-fit: cover; 
-    transform: translate(-50%, -50%);
-    border-radius: 15px;
-    border: black solid 1px;
-    opacity: 0; /* Start de video met opacity 0 */
-    transition: opacity 2s ease-in-out; /* Fade-in effect */
 }
 
 /*////// Column project ////////*/
@@ -1002,7 +983,6 @@ body {
     margin-bottom: 0.5em;
 }
 
-
 /*////////link website button///////*/
 
 .text-seeproject {
@@ -1035,7 +1015,6 @@ body {
     background-color: var(--primary-color);
     color: white;
 }
-
 
 /*/////////Proces sectie project 1///////////*/
 
@@ -1091,172 +1070,14 @@ body {
     border: 2px solid var(--primary-color2);
 }
 
-/*////////carousel van afbeeldingen//////////*/
 
-.proces-schetsen {
-    height: 50vh;
-    margin: 0;
-    padding: 5em 0;
-}
-
-.proces-schetsen h4 {
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    letter-spacing: var(--space-letter);
-    margin: 0.5em 1em;
-}
-
-.proces-schetsen p {
-    margin: 0 0 1em 2em;
-    font-size: var(--small-text-size);
-    font-family: var(--fontfamily-smalltext2);
-}
-
-
-.carousel-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-/* Styling voor de afbeeldingcontainer */
-.container-schetsen {
-    display: flex;
-    gap: 0.5em; /* ruimte tussen de afbeeldingen */
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    white-space: nowrap; /* Zorgt ervoor dat de items op één regel blijven */
-}
-
-.container-schetsen img {
-    width: 25em;
-    height: 20em;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-/* Styling voor de pijltjes */
-.carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: var(--secundair-color); /* gebruik een fallback kleur als var niet werkt */
-    border: none;
-    border-radius: 50%;
-    padding: 1em;
-    cursor: pointer;
-    z-index: 10;
-    margin: 0 2em;
-}
-
-/* Specifieke positionering voor de linker en rechter pijl */
-.carousel-left-arrow {
-    left: 0.5em;
-}
-
-.carousel-right-arrow {
-    right: 0.5em;
-    transform: translateY(-50%) rotate(180deg); /* Om de pijl naar rechts te laten wijzen */
-}
-
-/* Pas de grootte van het SVG-pijltje aan */
-.carousel-arrow img {
-    width: 3em;
-    height: 3em;
-}
-
-/*/////////kalenderblad/////////*/
-
-.container-finaleschets {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 5em 0;
-}
-
-
-.finale-schets {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60vw; 
-    height: auto;
-    position: relative;
-    overflow: hidden; 
-    border-radius: 15px; 
-    position: relative;
-}
-
-.finale-schets img {
-    width: 100%; 
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease-in-out; /* Optionele zoom-in effect */
-}
-
-/* Overlay stijl, standaard transparant */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Pas de kleur en doorzichtigheid aan naar wens */
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 15px; /* Zorg dat de overlay dezelfde ronding heeft als de afbeelding */
-    z-index: 1;
-}
-
-/* Standaard verborgen tekst */
-.text-finaleschets {
-    position: absolute;
-    z-index: 2;
-    width: 80%;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    color: white;
-}
-
-/* Stijl van de tekst */
-.text-finaleschets h4 {
-    font-size: var(--kop-text-size);
-    font-family: var(--fontfamily-kop3);
-    margin: 0;
-}
-
-.text-finaleschets p {
-    font-size: var(--small-text-size);
-    font-family: var(--fontfamily-smalltext2);
-    line-height: 1.5em;
-    margin-top: 0.5em;
-}
-
-/* Hover-effect: maak de overlay en tekst zichtbaar */
-.finale-schets:hover .overlay {
-    opacity: 1;
-}
-
-.finale-schets:hover .text-finaleschets {
-    opacity: 1;
-}
-
-.finale-schets:hover img {
-    transform: scale(1.05); /* Optionele zoom-in effect op afbeelding */
-}
-
-/*////// Project 2 page intro ////////*/
+/*////// Project page intro ////////*/
 
 .website-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 3em;
-
 }
 
 .website-container img  {
@@ -1358,7 +1179,7 @@ body {
     align-items: baseline;
     gap: 3em;
     margin: 0 2em;
-    border-bottom: 1px dashed var(--secundair-color2);
+    border-bottom: 2px dashed var(--secundair-color2);
 }
 
 .proces .titel-proces h3 {
