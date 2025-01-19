@@ -1008,7 +1008,8 @@ body {
 .text-seeproject {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    margin: 2em 2em;
 }
 
 .text-seeproject a {
@@ -1276,11 +1277,11 @@ body {
 
 .project-type p {
     padding: 0.8em 1.5em;
-    border: rgb(146, 146, 146) 2px dashed;
+    border: var(--secundair-color2) 2px dashed;
     border-radius: 50px;
     font-family: var(--fontfamily-smalltext2);
     font-size: var(--small-text-size);
-    color: rgb(146, 146, 146);
+    color: black;
 }
 
 .container-type-project-table {
@@ -1309,7 +1310,7 @@ body {
     align-items: baseline;
 }
 
-/*////////Download project 2///////////*/
+/*////////Download button///////////*/
 
 .download-project {
     display: flex;
@@ -1347,9 +1348,9 @@ body {
 }
 
 
-/*/////////Proces sectie project 2///////////*/
+/*/////////Proces sectie///////////*/
 .proces {
-    margin: 6em 0 0 0;
+    margin: 6em 0 10em 0;
 }
 
 .titel-proces {
@@ -1388,11 +1389,20 @@ body {
     width: 100%;
     height: auto;
     border-radius: 15px;
+    margin-bottom: 1em;
 }
 
 .container-text-proces {
     margin: 5em 0;
+}
 
+.container-text-proces ul {
+    letter-spacing: var(--space-letter);
+    font-weight: 300;
+    font-size: var(--small-text-size);
+    font-family: var(--fontfamily-smalltext2);
+    margin: 1em 2em;
+    width: 34em;
 }
 
 .container-text-proces p {
