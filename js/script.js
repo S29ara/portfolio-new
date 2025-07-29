@@ -142,36 +142,112 @@ projectElements.forEach(item => { // Gebruik de nieuwe constante
 ////////kleur overgang//////////
 ///////////////////////////////
 
-document.addEventListener("DOMContentLoaded", function() {
+// Hex to RGB
+function hexToRgb(hex) {
+    hex = hex.replace('#','');
+    if (hex.length === 3) hex = hex.split('').map(c => c+c).join('');
+    let num = parseInt(hex, 16);
+    return [
+      (num >> 16) & 255,
+      (num >> 8) & 255,
+      num & 255
+    ];
+  }
+
+  // Interpolate between two RGB colors
+  function interpolateColor(color1, color2, factor) {
+    return color1.map((c, i) => Math.round(c + (color2[i] - c) * factor));
+  }
+
+  // Convert RGB array to CSS string
+  function rgbToCss(rgb) {
+    return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+  }
+
+  // Main function
+  function updateBackground() {
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollProgress = docHeight === 0 ? 0 : scrollY / docHeight;
+
+    const colorStart = hexToRgb('#f7f6f5');
+    const colorMiddle = hexToRgb(' #F2C7BD');
+    const colorEnd = hexToRgb('#474747');
+
+    let bgColor;
+    if (scrollProgress < 0.5) {
+      // First half: start → middle
+      const factor = scrollProgress / 0.5; // 0 to 1
+      bgColor = interpolateColor(colorStart, colorMiddle, factor);
+    } else {
+      // Second half: middle → end
+      const factor = (scrollProgress - 0.5) / 0.5; // 0 to 1
+      bgColor = interpolateColor(colorMiddle, colorEnd, factor);
+    }
+    document.body.style.background = rgbToCss(bgColor);
+  }
+
+  window.addEventListener('scroll', updateBackground);
+  window.addEventListener('resize', updateBackground);
+  window.addEventListener('DOMContentLoaded', updateBackground);
+
+
+////////////////////////////////
+////////Underline scroll///////
+//////////////////////////////
+
+document.addEventListener('DOMContentLoaded', function () {
     const section = document.querySelector('.freetime-work-section');
-    const heading = section ? section.querySelector('h4') : null;
+    const h4 = section.querySelector('h4');
+    const ps = section.querySelectorAll('p');
 
-    console.log("Section:", section);
-    console.log("Heading:", heading);
+    // Color values: black to pink for h4, dark gray to pink for p
+    const colorStartH4 = [0, 0, 0];             // #000
+    const colorEndH4 = [242, 199, 189];         // #F2C7BD
+    const colorStartP = [34, 34, 34];           // #222
+    const colorEndP = [242, 199, 189];          // #F2C7BD
 
-    if (!section || !heading) {
-        console.error("Section of heading is niet gevonden.");
-        return;
+    function interpolateColor(color1, color2, factor) {
+      return color1.map((c, i) => Math.round(c + (color2[i] - c) * factor));
+    }
+    function rgbToCss(rgb) {
+      return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                section.classList.add('scrolled-in');      // Kleurverandering van de sectie
-                heading.classList.add('scrolled-in');      // Animatie voor de lijn in h4
-            } else {
-                section.classList.remove('scrolled-in');
-                heading.classList.remove('scrolled-in');
-            }
+    function updateOnScroll() {
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        let visibleFraction = 1 - Math.min(Math.max(rect.top / windowHeight, 0), 1);
+
+        // H4 color
+        const newColorH4 = interpolateColor(colorStartH4, colorEndH4, visibleFraction);
+        h4.style.color = rgbToCss(newColorH4);
+        h4.style.setProperty('--underline-scale', visibleFraction);
+        h4.classList.add('underline-animated');
+
+        // P color
+        ps.forEach(p => {
+          const newColorP = interpolateColor(colorStartP, colorEndP, visibleFraction);
+          p.style.color = rgbToCss(newColorP);
         });
-    }, {
-        threshold: 0.5 // De hele sectie moet in beeld zijn
-    });
 
-    observer.observe(section);
-});
+      } else {
+        h4.style.color = '';
+        h4.style.setProperty('--underline-scale', 0);
+        h4.classList.remove('underline-animated');
+        ps.forEach(p => {
+          p.style.color = '';
+        });
+      }
+    }
 
-
+    window.addEventListener('scroll', updateOnScroll);
+    window.addEventListener('resize', updateOnScroll);
+    updateOnScroll();
+  });
+  
 /////////////////////////////////
 //////Soepel scroll effect///////
 /////////////////////////////////
