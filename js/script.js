@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateOnScroll);
     updateOnScroll();
   });
-  
+
 /////////////////////////////////
 //////Soepel scroll effect///////
 /////////////////////////////////
@@ -256,3 +256,50 @@ document.addEventListener('DOMContentLoaded', function () {
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
+
+
+//////////////////////////////////
+///////hamburger menu////////////
+////////////////////////////////
+
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const navLinks = document.querySelectorAll('.mobile-nav-links a');
+  
+    function toggleMenu(open) {
+      if (open) {
+        menuToggle.classList.add('open');
+        mobileMenu.classList.add('open');
+        menuOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        menuToggle.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        menuOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+  
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.classList.contains('open');
+      toggleMenu(!isOpen);
+    });
+  
+    menuOverlay.addEventListener('click', () => {
+      toggleMenu(false);
+    });
+  
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMenu(false);
+      });
+    });
+  
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        toggleMenu(false);
+      }
+    });
+  });

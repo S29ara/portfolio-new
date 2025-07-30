@@ -59,10 +59,16 @@ html {
     --space-letter: 1px;
 
     /*font size */
-    --titel-text-size: 5em;
+    --titel-text-size: 6em;
     --proces-section-text: 10em;
     --kop-text-size: 2em;
     --small-text-size: 1em;
+
+    /*font size mobile */
+    --titel-mobile-text: 3.5em;
+    --proces-mobile-text: 5em;
+    --kop-mobile-text: 1.8em;
+    --small-mobile-text: 1.2em;
 }
 
 body {
@@ -84,6 +90,159 @@ body {
 /*/////// navigatie ///////*/
 /*////////////////////////*/
 
+/* --- MOBILE NAVIGATION --- */
+@media (max-width: 900px) {
+    .container-menu {
+      height: 15vh;
+      padding: 0 1em;
+    }
+    .logo {
+      width: 34px;
+    }
+    .text-underlogo {
+      display: none;
+    }
+    .nav-bar {
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Hamburger icon visible, desktop links hidden */
+    .menu-toggle {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      z-index: 1002;
+      font-size: 2.2em;
+      color: var(--basic-color);
+    }
+    .menu-icon, .menu-icon:before, .menu-icon:after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 3.5px;
+      background: #3b3b3b;
+      border-radius: 2px;
+      position: relative;
+      transition: all 0.33s cubic-bezier(.77,0,.175,1);
+    }
+    .menu-icon {
+      position: relative;
+    }
+    .menu-icon:before {
+      position: absolute;
+      top: -9px;
+    }
+    .menu-icon:after {
+      position: absolute;
+      bottom: -9px;
+    }
+    .menu-toggle.open .menu-icon {
+      background: transparent;
+    }
+    .menu-toggle.open .menu-icon:before {
+      top: 0;
+      transform: rotate(45deg);
+      background: var(--basic-color);
+    }
+    .menu-toggle.open .menu-icon:after {
+      bottom: 0;
+      transform: rotate(-45deg);
+      background: var(--basic-color);
+    }
+    .nav-pill-wrapper,
+    .nav-right-wrapper {
+      display: none !important;
+    }
+  
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100vw;
+      width: 80vw;
+      max-width: 80vw;
+      height: 200vh;
+      background: var(--background-color);
+      box-shadow: -2px 0 18px rgba(0,0,0,0.07);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 90px 32px 32px 32px;
+      transition: right 0.35s cubic-bezier(.77,0,.175,1);
+    }
+    .mobile-menu.open {
+      right: 0;
+    }
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-bottom: 44px;
+    }
+    .mobile-nav-links a {
+      text-decoration: none;
+      color: var(--basic-color);
+      font-size: var(--small-mobile-text);
+      font-family: var(--fontfamily-smalltext1);
+      font-weight: 500;
+      padding: 10px 0;
+      border-radius: 4px;
+      transition: background .2s, color .2s;
+      text-align: left;
+    }
+    .mobile-nav-links a:hover,
+    .mobile-nav-links a.active {
+      color: var(--primary-color);
+    }
+    .mobile-socials {
+      display: flex;
+      flex-direction: row;
+      gap: 2em;
+      justify-content: flex-start;
+      margin-top: 5vh;
+    }
+    .mobile-socials a {
+      color: var(--basic-color);
+      font-size: var(--small-mobile-text);
+      font-family: var(--fontfamily-smalltext1);
+      text-decoration: none;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-socials a:hover {
+      color: var(--primary-color);
+    }
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; 
+      height: 200vh;
+      background: rgba(0,0,0,0.20);
+      z-index: 1000;
+      transition: opacity 0.3s ease;
+    }
+    .menu-overlay.open {
+      display: block;
+      opacity: 1;
+    }
+}
+
+    /* Hide mobile menu and hamburger on desktop */
+@media (min-width: 901px) {
+    .mobile-menu,
+    .menu-overlay,
+    .menu-toggle {
+      display: none !important;
+    }
+  }
+
 .container-menu {
     position: fixed;
     left: 0;
@@ -97,7 +256,6 @@ body {
     z-index: 900; /* Zorg ervoor dat het boven andere elementen staat */
     transition: all 0.3s ease; /* Voor smooth transitions */
 }
-
 
 /* Standaard uit de weergave als de gebruiker naar beneden scrolt */
 .container-menu.hidden {
@@ -229,7 +387,7 @@ body {
 
 .intro-tekst p:nth-of-type(1) {
     font-family: var(--fontfamily-kop3);
-    font-size: 6em;
+    font-size: var(--titel-text-size);
     opacity: 0; /* Begin met een lage opaciteit */
     animation: fadeIn 1s forwards; /* Voeg animatie toe */
     animation-delay: 0s; /* Geen vertraging voor de eerste tekst */
@@ -237,7 +395,7 @@ body {
 
 .intro-tekst p:nth-of-type(3) {
     font-family: var(--fontfamily-kop2);
-    font-size: 6em;
+    font-size: var(--titel-text-size);
     color: var(--primary-color);
     opacity: 0; /* Begin met een lage opaciteit */
     animation: fadeIn 1s forwards; /* Voeg animatie toe */
@@ -310,7 +468,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 100vw;
+    width: auto;
     height: 30vh;
     overflow: hidden; 
     background-color: var(--primary-color);
@@ -331,6 +489,34 @@ body {
     transform: translateX(0); /* Startpositie */
     will-change: transform; /* Verbetert de performance */
 }
+
+/* mobile screen*/
+@media (max-width: 700px) {
+
+    .container-intro {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .intro-tekst p:nth-of-type(1), 
+    .intro-tekst p:nth-of-type(3) {
+        font-size: var(--titel-mobile-text);
+    }
+    .gif-oog {
+        margin: 0 0 3em 0;
+    }
+
+    .scroll-text {
+        height: 20vh;
+    }
+
+
+    .scroll-text h1 {
+        font-size: var(--proces-mobile-text);
+    }
+
+}
+
 
 
 /*/// project section ///*/
@@ -1255,10 +1441,3 @@ body {
     justify-content: center;
     margin: 2em 0 10em 0;
 }
-
-
-
-
-
-
-
