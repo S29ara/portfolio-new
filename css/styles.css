@@ -502,6 +502,7 @@ body {
     .intro-tekst p:nth-of-type(3) {
         font-size: var(--titel-mobile-text);
     }
+
     .gif-oog {
         margin: 0 0 3em 0;
     }
@@ -510,13 +511,11 @@ body {
         height: 20vh;
     }
 
-
     .scroll-text h1 {
         font-size: var(--proces-mobile-text);
     }
 
 }
-
 
 
 /*/// project section ///*/
@@ -687,16 +686,43 @@ body {
     display: block;
 }
 
+/* mobile screen */
+@media (max-width: 900px) {
+    .projects-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: 100%;
+        margin: 0;
+      }
+
+      .projects-section a,
+      .project-item {
+        width: 100%;
+        display: block;
+      }
+
+      .project-1,
+      .project-2,
+      .project-3,
+      .project-4,
+      .project-5,
+      .project-6 {
+        grid-column: auto !important;
+        grid-column-end: auto !important;
+        align-self: auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 3em;
+      }
+    
+}
+
 /*//////////sectie eigen werk//////////*/
 
 .freetime-work-section {
     position: relative;
     padding:  5em 2em;
 }
-
-/* .freetime-work-section.scrolled-in {
-    background-color: #3b3b3b; /* Kies een doelachtergrondkleur */
-    /* color: var(--secundair-color); } */
 
 .freetime-work-section h4 {
     position: relative;
@@ -820,6 +846,16 @@ body {
     grid-column-end: 3;
     grid-row: 2;
     grid-row-end: 3;
+}
+
+@media (max-width: 900px) {
+    .img-gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 5em;
+        margin-bottom: 3em;
+    }
+
 }
 
 
