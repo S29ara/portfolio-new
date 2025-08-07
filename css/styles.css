@@ -87,7 +87,7 @@ body {
 
 
 /*/////////////////////////*/
-/*/////// navigatie ///////*/
+/*/////// navigation ///////*/
 /*////////////////////////*/
 
 /* --- MOBILE NAVIGATION --- */
@@ -967,10 +967,34 @@ body {
     letter-spacing: var(--space-letter);
 }
 
-/* Responsive work page */ 
-@media screen and (min-width: 80rem){
-}
+/* Responsive footer */ 
+@media (max-width: 900px) {
+    .footer-intro {
+        padding-top: 1em;
+        font-size: var(--titel-mobile-text);
+    }
+    .footer-intro img {
+        width: 2em;
+    }
+    .top-footer-wrapper {
+        justify-content: center;
+        padding: 1.5em;
+    }
 
+    .top-footer-wrapper .logo {
+        display: none;
+    }
+
+    .container-footer {
+        padding: 1em;
+    }
+
+    .bottom-footer-wrapper {
+        padding: 2em;
+        align-items: flex-start;
+    }
+    
+}
 
 /*////////////About moi/////////////*/
 
