@@ -1165,6 +1165,50 @@ body {
     border-right: 2px solid var(--secundair-color);
 }
 
+/* responsive about me page */
+@media (max-width: 900px)  {
+
+    .intro-aboutme {
+        padding: 2em;
+        height: 70vh;
+    }
+    .container-aboutme {
+        grid-template-columns: 0.5fr 0.5fr 0.5fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .container-aboutme  h1 {
+        grid-row: 1;
+        font-size: 2.5em
+    }
+    .container-aboutme  h2 {
+        grid-row: 1;
+        font-size: 2em;
+    }
+
+    .container-img-aboutme {
+        grid-row-start: 2;
+        grid-column-start: 1;
+    }
+
+    .container-column-aboutme {
+        width: 70vw;
+    }
+
+    .container-column-aboutme p {
+        font-size: var(--small-mobile-text);
+    }
+
+    .container-table-skills {
+       padding: 2em;
+    }
+    
+    .skills-table {
+        font-size: var(--small-mobile-text);
+    }
+
+}
+
 /*////// Project 1 page intro ////////*/
 
 /*/////go back button//////*/
