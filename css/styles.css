@@ -855,9 +855,7 @@ body {
         gap: 5em;
         margin-bottom: 3em;
     }
-
 }
-
 
 /*///////Footer////////////*/
 
@@ -875,6 +873,7 @@ body {
     background-color: #000;
     width: 100%;
     color: white;
+    height: 100%;
     font-size: var(--titel-text-size);
     font-family: var(--fontfamily-kop2);
 }
@@ -991,7 +990,7 @@ body {
 
     .bottom-footer-wrapper {
         padding: 2em;
-        align-items: flex-start;
+        align-items: flex-end;
     }
     
 }
@@ -1277,6 +1276,15 @@ body {
     margin-bottom: 0.5em;
 }
 
+/* responsive column intro */
+@media (max-width: 900px) { 
+    .column-project-container {
+        columns: 1;
+    }
+
+
+}
+
 /*////////link website button///////*/
 
 .text-seeproject {
@@ -1425,6 +1433,13 @@ body {
     align-items: baseline;
 }
 
+/* responsive project intro page */
+@media (max-width: 900px) {
+    .project-type p {
+        font-size: 0.6em;
+    }
+}
+
 /*////////Download button///////////*/
 
 .download-project {
@@ -1461,7 +1476,6 @@ body {
     -webkit-box-shadow: -1px 2px 13px 3px rgba(55,76,140,0.75) inset;
     -moz-box-shadow: -1px 2px 13px 3px rgba(55,76,140,0.75) inset;;
 }
-
 
 /*/////////Proces sectie///////////*/
 .proces {
