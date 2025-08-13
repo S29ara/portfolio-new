@@ -66,7 +66,7 @@ html {
 
     /*font size mobile */
     --titel-mobile-text: 3.5em;
-    --proces-mobile-text: 5em;
+    --proces-mobile-text: 7em;
     --kop-mobile-text: 1.8em;
     --small-mobile-text: 1.2em;
 }
@@ -480,7 +480,7 @@ body {
 .scroll-text h1 {
     font-family: var(--fontfamily-kop3);
     color: white;
-    font-size: 8em;
+    font-size: var(--titel-text-size);
     font-weight: 300;
     white-space: nowrap; /* Zorg ervoor dat de tekst op één regel blijft */
     position: relative;
@@ -1018,7 +1018,7 @@ body {
 }
 
 .container-aboutme  h1 {
-    font-size: 7em;
+    font-size:  var(--titel-text-size);
     font-family: var(--fontfamily-kop2);
     font-weight: 300;
     grid-column: 1;
@@ -1030,7 +1030,7 @@ body {
 }
 
 .container-aboutme h2 {
-    font-size: 6em;
+    font-size: var(--titel-text-size);
     font-family: var(--fontfamily-kop3);
     color: var(--background-color);
     font-weight: 300;
@@ -1123,7 +1123,7 @@ body {
 }
 
 .container-column-aboutme p {
-    font-size: var(--kop-text-size);
+    font-size: 1.2em;
     font-family: var(--fontfamily-smalltext2);
     font-weight: 300;
     line-height: 1.5em;
@@ -1140,7 +1140,7 @@ body {
 
 .skills-table {
     border-collapse: collapse;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 .skills-table th {
@@ -1281,8 +1281,6 @@ body {
     .column-project-container {
         columns: 1;
     }
-
-
 }
 
 /*////////link website button///////*/
@@ -1558,4 +1556,27 @@ body {
     align-items: center;
     justify-content: center;
     margin: 2em 0 10em 0;
+}
+
+/* responsive proces detail page */
+@media (max-width: 900px) {
+    .proces .titel-proces h3 {
+        font-size: var(--proces-mobile-text);
+    }
+
+    .container-proces-img-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-text-proces p {
+        width: auto;
+    }
+
+    .figma-prototype {
+        width: 100%;
+        height: auto;
+    }
+
 }

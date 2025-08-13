@@ -3,43 +3,57 @@
   ///navigatie///
   //////////////
 
-      // Variabelen voor navigatie en scroll
-      const nav = document.querySelector('.container-menu');
-      let lastScrollY = window.scrollY;
-  
-      // Event listener voor scrollen
-      window.addEventListener('scroll', () => {
-          if (window.scrollY > lastScrollY) {
-              // Als er naar beneden is gescrold
-              nav.classList.add('hidden');
-          } else {
-              // Als er naar boven is gescrold
-              nav.classList.remove('hidden');
-          }
-          // Update lastScrollY
-          lastScrollY = window.scrollY;
-      });
+// Variabelen voor navigatie en scroll
+const nav = document.querySelector('.container-menu');
+let lastScrollY = window.scrollY;
 
+// Event listener voor scrollen
+window.addEventListener('scroll', () => {
+    // Get the mobile menu
+    const mobileMenu = document.querySelector('.mobile-menu');
+    // Als mobiel menu open is, doe niets
+    if (mobileMenu && mobileMenu.classList.contains('open')) {
+        return;
+    }
+    // Anders, normale logica
+    if (window.scrollY > lastScrollY) {
+        // Naar beneden gescrold
+        nav.classList.add('hidden');
+    } else {
+        // Naar boven gescrold
+        nav.classList.remove('hidden');
+    }
+    lastScrollY = window.scrollY;
+});
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const workLink = document.getElementById("work-link");
-    const aboutLink = document.getElementById("about-link");
+document.addEventListener("DOMContentLoaded", () => {
+  const workLink = document.getElementById("work-link");
+  const aboutLink = document.getElementById("about-link");
 
-    workLink.addEventListener("click", () => {
+  if (workLink && aboutLink) {
+    workLink.addEventListener("click", (e) => {
+      if (workLink.getAttribute("href") === "#") {
+        e.preventDefault();
         workLink.classList.add("active");
         workLink.classList.remove("inactive");
         aboutLink.classList.add("inactive");
         aboutLink.classList.remove("active");
+      }
+      // else: allow navigation!
     });
 
-    aboutLink.addEventListener("click", () => {
+    aboutLink.addEventListener("click", (e) => {
+      if (aboutLink.getAttribute("href") === "#") {
+        e.preventDefault();
         aboutLink.classList.add("active");
         aboutLink.classList.remove("inactive");
         workLink.classList.add("inactive");
         workLink.classList.remove("active");
+      }
+      // else: allow navigation!
     });
+  }
 });
-
     //////////////////////
     /////scroll text//////
     /////////////////////
@@ -84,8 +98,12 @@ const seeObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-// Start het observeren van de scrollTextContainer
-seeObserver.observe(scrollTextContainer);
+  // Null check to avoid JS error!
+  if (scrollTextContainer) {
+    seeObserver.observe(scrollTextContainer);
+  } else {
+    console.warn('scrollTextContainer not found!');
+  }
 
 //////////////////////////////
 //// zichtbaar projecten ////
@@ -138,61 +156,66 @@ projectElements.forEach(item => { // Gebruik de nieuwe constante
     });
 });
 
-/////////////////////////////////
+///////////////////////////////
 ////////kleur overgang//////////
 ///////////////////////////////
 
 // Hex to RGB
 function hexToRgb(hex) {
-    hex = hex.replace('#','');
-    if (hex.length === 3) hex = hex.split('').map(c => c+c).join('');
-    let num = parseInt(hex, 16);
-    return [
-      (num >> 16) & 255,
-      (num >> 8) & 255,
-      num & 255
-    ];
+  hex = hex.replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  let num = parseInt(hex, 16);
+  return [
+    (num >> 16) & 255,
+    (num >> 8) & 255,
+    num & 255
+  ];
+}
+
+// Interpolate between two RGB colors
+function interpolateColor(color1, color2, factor) {
+  return color1.map((c, i) => Math.round(c + (color2[i] - c) * factor));
+}
+
+// Convert RGB array to CSS string
+function rgbToCss(rgb) {
+  return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+}
+
+// Only run if body does NOT have .no-bg-effect
+function shouldUpdateBackground() {
+  return !document.body.classList.contains('no-bg-effect');
+}
+
+function updateBackground() {
+  if (!shouldUpdateBackground()) return; // Skip effect on About Me page
+
+  const scrollY = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollProgress = docHeight === 0 ? 0 : scrollY / docHeight;
+
+  const colorStart = hexToRgb('#f7f6f5');
+  const colorMiddle = hexToRgb('#F2C7BD'); // Remove space!
+  const colorEnd = hexToRgb('#474747');
+
+  let bgColor;
+  if (scrollProgress < 0.5) {
+    // First half: start → middle
+    const factor = scrollProgress / 0.5; // 0 to 1
+    bgColor = interpolateColor(colorStart, colorMiddle, factor);
+  } else {
+    // Second half: middle → end
+    const factor = (scrollProgress - 0.5) / 0.5; // 0 to 1
+    bgColor = interpolateColor(colorMiddle, colorEnd, factor);
   }
+  document.body.style.background = rgbToCss(bgColor);
+}
 
-  // Interpolate between two RGB colors
-  function interpolateColor(color1, color2, factor) {
-    return color1.map((c, i) => Math.round(c + (color2[i] - c) * factor));
-  }
+window.addEventListener('scroll', updateBackground);
+window.addEventListener('resize', updateBackground);
+window.addEventListener('DOMContentLoaded', updateBackground);
 
-  // Convert RGB array to CSS string
-  function rgbToCss(rgb) {
-    return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-  }
-
-  // Main function
-  function updateBackground() {
-    const scrollY = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollProgress = docHeight === 0 ? 0 : scrollY / docHeight;
-
-    const colorStart = hexToRgb('#f7f6f5');
-    const colorMiddle = hexToRgb(' #F2C7BD');
-    const colorEnd = hexToRgb('#474747');
-
-    let bgColor;
-    if (scrollProgress < 0.5) {
-      // First half: start → middle
-      const factor = scrollProgress / 0.5; // 0 to 1
-      bgColor = interpolateColor(colorStart, colorMiddle, factor);
-    } else {
-      // Second half: middle → end
-      const factor = (scrollProgress - 0.5) / 0.5; // 0 to 1
-      bgColor = interpolateColor(colorMiddle, colorEnd, factor);
-    }
-    document.body.style.background = rgbToCss(bgColor);
-  }
-
-  window.addEventListener('scroll', updateBackground);
-  window.addEventListener('resize', updateBackground);
-  window.addEventListener('DOMContentLoaded', updateBackground);
-
-
-////////////////////////////////
+///////////////////////
 ////////Underline scroll///////
 //////////////////////////////
 
@@ -257,7 +280,6 @@ if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 
-
 //////////////////////////////////
 ///////hamburger menu////////////
 ////////////////////////////////
@@ -270,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
     function toggleMenu(open) {
       if (open) {
+        console.log('toggleMenu:', open);
         menuToggle.classList.add('open');
         mobileMenu.classList.add('open');
         menuOverlay.classList.add('open');
