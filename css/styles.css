@@ -1171,6 +1171,7 @@ body {
         padding: 2em;
         height: 70vh;
     }
+
     .container-aboutme {
         grid-template-columns: 0.5fr 0.5fr 0.5fr;
         grid-template-rows: 1fr 1fr;
@@ -1178,6 +1179,7 @@ body {
 
     .container-aboutme  h1 {
         grid-row: 1;
+        grid-row-end: 1;
         font-size: 2.5em
     }
     .container-aboutme  h2 {
@@ -1205,6 +1207,21 @@ body {
     .skills-table {
         font-size: var(--small-mobile-text);
     }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .container-aboutme  h1 {
+        align-self: flex-end;
+    }
+
+    .container-aboutme  h1, .container-aboutme  h2 {
+        font-size: 4em;
+    }
+
+    .container-aboutme  h2 {
+        align-self: center;
+    }
+
 
 }
 
