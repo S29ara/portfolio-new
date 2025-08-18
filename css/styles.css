@@ -484,7 +484,7 @@ body {
     font-weight: 300;
     white-space: nowrap; /* Zorg ervoor dat de tekst op één regel blijft */
     position: relative;
-    transition: transform 0.2s ease-out; /* Vloeiende overgang voor het verschuiven */
+    transition: transform 0.s ease-out; /* Vloeiende overgang voor het verschuiven */
     margin: 0;
     transform: translateX(0); /* Startpositie */
     will-change: transform; /* Verbetert de performance */
@@ -528,7 +528,6 @@ body {
     .scroll-text {
         height: 20vh;
     }
-
  }
 
 /*/// project section ///*/
@@ -656,7 +655,6 @@ body {
     margin-top: 10em;
 }
 
-
 /* Standaard styling voor projecten */
 .project-item {
     position: relative;
@@ -726,13 +724,22 @@ body {
         align-self: auto !important;
         margin-top: 0 !important;
         margin-bottom: 3em;
-      }
-
-      .project-item:hover ~ .hover-button  {
-        display: none;
-      }
-    
+      }  
 }
+
+/* Hover alleen toestaan op grotere schermen (bijv. > 768px) */
+@media screen and (min-width: 769px) {
+    .project-item:hover ~ .hover-button {
+      display: block;
+    }
+  }
+  
+  /* Hover-button forceren uit op kleine schermen */
+  @media screen and (max-width: 768px) {
+    .hover-button {
+      display: none !important;
+    }
+  }
 
 /*//////////sectie eigen werk//////////*/
 

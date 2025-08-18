@@ -63,13 +63,21 @@ const scrollText = document.querySelectorAll('.scroll-text h1'); // NodeList van
 let scrollPosition = window.scrollY;
 let isScrolling = false;
 
-// Functie om de tekstpositie bij te werken
+// // Functie om de tekstpositie bij te werken
+// function updateScrollText() {
+//     scrollText.forEach((text) => {
+//         // Pas de stijl toe op elk individueel h1-element
+//         text.style.transform = `translateX(${scrollPosition * 0.3}px)`; // Langzamere scroll-snelheid
+//     });
+//     isScrolling = false;
+// }
+
 function updateScrollText() {
-    scrollText.forEach((text) => {
-        // Pas de stijl toe op elk individueel h1-element
-        text.style.transform = `translateX(${scrollPosition * 0.3}px)`; // Langzamere scroll-snelheid
-    });
-    isScrolling = false;
+  const rect = scrollTextContainer.getBoundingClientRect();
+  scrollText.forEach((text) => {
+    text.style.transform = `translateX(${rect.top * 0.3}px)`;
+  });
+  isScrolling = false;
 }
 
 // Maak een observer om te kijken of scrollTextContainer in beeld komt
