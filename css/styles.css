@@ -68,7 +68,7 @@ html {
     --titel-mobile-text: 3.5em;
     --proces-mobile-text: 7em;
     --kop-mobile-text: 1.8em;
-    --small-mobile-text: 1.2em;
+    --small-mobile-text: 1em;
 }
 
 body {
@@ -512,11 +512,24 @@ body {
     }
 
     .scroll-text h1 {
-        font-size: var(--proces-mobile-text);
+        font-size: var(--titel-mobile-text);
     }
 
 }
 
+/* ipad size */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .intro-tekst p:nth-of-type(1), 
+    .intro-tekst p:nth-of-type(3) {
+        font-size: 4.5em;
+    }
+
+    .scroll-text {
+        height: 20vh;
+    }
+
+ }
 
 /*/// project section ///*/
 
@@ -1209,19 +1222,20 @@ body {
     }
 }
 
+/* ipad sizes*/
 @media (min-width: 768px) and (max-width: 1024px) { 
     .container-aboutme  h1 {
         align-self: flex-end;
     }
 
     .container-aboutme  h1, .container-aboutme  h2 {
-        font-size: 4em;
+        font-size: 4.5em;
     }
 
     .container-aboutme  h2 {
         align-self: center;
+        margin: 0.5em 0 0 0;
     }
-
 
 }
 
