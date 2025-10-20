@@ -54,9 +54,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-    //////////////////////
-    /////scroll text//////
-    /////////////////////
+
+//////////////////////
+/////PAGE LOADER//////
+/////////////////////
+
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  const gifDurationMs = 5500; // duur GIF
+
+  // Verberg loader na max GIF duur of na load event
+  setTimeout(() => {
+    loader.style.opacity = '0';
+    setTimeout(() => loader.style.display = 'none', 600);
+  }, gifDurationMs);
+});
+
+//////////////////////
+/////scroll text//////
+/////////////////////
 
 const scrollTextContainer = document.querySelector('.scroll-text');
 const scrollText = document.querySelectorAll('.scroll-text h1'); // NodeList van alle h1-elementen
@@ -291,46 +307,28 @@ if ('scrollRestoration' in history) {
 //////////////////////////////////
 ///////hamburger menu////////////
 ////////////////////////////////
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const menuOverlay = document.querySelector('.menu-overlay');
+const menuLinks = document.querySelectorAll('.mobile-nav-links a');
 
-document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuOverlay = document.querySelector('.menu-overlay');
-    const navLinks = document.querySelectorAll('.mobile-nav-links a');
-  
-    function toggleMenu(open) {
-      if (open) {
-        console.log('toggleMenu:', open);
-        menuToggle.classList.add('open');
-        mobileMenu.classList.add('open');
-        menuOverlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      } else {
-        menuToggle.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        menuOverlay.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    }
-  
-    menuToggle.addEventListener('click', () => {
-      const isOpen = menuToggle.classList.contains('open');
-      toggleMenu(!isOpen);
-    });
-  
-    menuOverlay.addEventListener('click', () => {
-      toggleMenu(false);
-    });
-  
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        toggleMenu(false);
-      });
-    });
-  
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        toggleMenu(false);
-      }
-    });
+function toggleMenu() {
+  menuToggle.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  menuOverlay.classList.toggle('open');
+
+  // Stagger animatie voor menu items
+  menuLinks.forEach((link, index) => {
+    link.style.transition = `opacity 0.3s ease ${index * 0.2 + 0.3}s, transform 0.6s ease ${index * 0.2 + 0.3}s`;
+    link.style.opacity = mobileMenu.classList.contains('open') ? '1' : '0';
+    link.style.transform = mobileMenu.classList.contains('open') ? 'translateY(0)' : 'translateY(20px)';
   });
+}
+
+menuToggle.addEventListener('click', toggleMenu);
+menuOverlay.addEventListener('click', toggleMenu);
+
+// Sluit menu als je op een menu-item klikt
+menuLinks.forEach(link => {
+  link.addEventListener('click', toggleMenu);
+});

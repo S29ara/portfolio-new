@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "gsap": "^3.13.0",
     "in-view": "^0.6.1",
     "jquery": "^3.7.1",
     "locomotive-scroll": "^4.1.4"
