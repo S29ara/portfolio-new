@@ -95,7 +95,6 @@ html {
   /* Verberg body-inhoud tot loader klaar is */
   body.loading {
     overflow: hidden; /* geen scrollen */
-    opacity: 0.3; /* optioneel: lichte dim */
   }
   
   body.loaded {
