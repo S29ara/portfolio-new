@@ -59,16 +59,25 @@ document.addEventListener("DOMContentLoaded", () => {
 /////PAGE LOADER//////
 /////////////////////
 
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
-  const gifDurationMs = 5500; // duur GIF
+const loaderShown = sessionStorage.getItem('loaderShown');
+const loader = document.getElementById('loader');
 
-  // Verberg loader na max GIF duur of na load event
-  setTimeout(() => {
-    loader.style.opacity = '0';
-    setTimeout(() => loader.style.display = 'none', 600);
-  }, gifDurationMs);
-});
+if (loaderShown) {
+  // Verberg de loader direct als hij al eens getoond is
+  loader.style.display = 'none';
+} else {
+  // Toon loader voor de eerste keer
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 500);
+      // Markeer als getoond
+      sessionStorage.setItem('loaderShown', 'true');
+    }, 1000); // minimaal 1 seconde zichtbaar
+  });
+}
 
 //////////////////////
 /////scroll text//////
