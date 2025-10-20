@@ -92,12 +92,22 @@ html {
     image-rendering: pixelated; /* pixel look */
   }
 
+  /* Verberg body-inhoud tot loader klaar is */
+  body.loading {
+    overflow: hidden; /* geen scrollen */
+    opacity: 0.3; /* optioneel: lichte dim */
+  }
+  
+  body.loaded {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  }
+
   /* Loader mobile */
   @media (max-width: 900px) {
     #loader img {
         width: 80vw;
     }
-    
   }
   
 
