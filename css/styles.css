@@ -460,6 +460,7 @@ body {
     width: 100%;
     max-width: 100%;
     margin: 0;
+    height: auto;
 }
 
 .arrowdown {
@@ -529,11 +530,24 @@ body {
     font-weight: 300;
     white-space: nowrap; /* Zorg ervoor dat de tekst op één regel blijft */
     position: relative;
-    transition: transform 0.s ease-out; /* Vloeiende overgang voor het verschuiven */
+    transition: transform 0.1s ease-out; /* Vloeiende overgang voor het verschuiven */
     margin: 0;
     transform: translateX(0); /* Startpositie */
     will-change: transform; /* Verbetert de performance */
 }
+
+/* ipad size */
+@media (min-width: 730px) and (max-width: 1024px) {
+
+    .intro-tekst p:nth-of-type(1), 
+    .intro-tekst p:nth-of-type(3) {
+        font-size: 4.5em;
+    }
+
+    .scroll-text {
+        height: 25vh;
+    }
+ }
 
 /* mobile screen*/
 @media (max-width: 700px) {
@@ -561,19 +575,6 @@ body {
     }
 
 }
-
-/* ipad size */
-@media (min-width: 768px) and (max-width: 1024px) {
-
-    .intro-tekst p:nth-of-type(1), 
-    .intro-tekst p:nth-of-type(3) {
-        font-size: 4.5em;
-    }
-
-    .scroll-text {
-        height: 20vh;
-    }
- }
 
 /*/// project section ///*/
 
@@ -1599,6 +1600,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0 2em;
+    gap: 1.5em;
 }
 
 .container-image-proces  {
@@ -1652,6 +1654,21 @@ body {
     justify-content: center;
     margin: 2em 0 10em 0;
 }
+
+/* ipad size */
+@media (min-width: 768px) and (max-width: 1024px) { 
+
+    .container-proces-img-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-text-proces p {
+        width: auto;
+    }
+}
+
 
 /* responsive proces detail page */
 @media (max-width: 900px) {
